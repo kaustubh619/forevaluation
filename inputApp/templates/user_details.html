@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+{% block title %}User Details{% endblock %}
+{% block content %}
+
+{% if data %}
+{% for i in data %}
+<div class="col-xs-12 card">
+    <div class="col-xs-5" style="color: white">
+        <h3>Project ID: {{ i.id }}</h3>
+        <h4>Organization: {{ i.organization }}</h4>
+        <h4>Project: {{ i.project }}</h4>
+        <h4>Valuation Date: {{ i.valuation_date }}</h4>
+        <h4>Statutory Corporate Tax Rate: {{ i.statutory_corporate_tax_rate }}%</h4>
+        <h4>Statutory MAT Rate: {{ i.statutory_mat_rate }}%</h4>
+        <h4>Post Tax WACC: {{ i.post_tax_wacc }}%</h4>
+        <h4>Long Term Growth Rate: {{ i.long_term_growth_rate }}%</h4>
+        <h4>Company Specific Rate: {{ i.company_specific_risk }}%</h4>
+        <h4>Contingent Liability: {{ i.contingent_liability }}%</h4>
+        <h4>Total Shares Outstanding: {{ i.total_shares_outstanding }}</h4>
+    </div>
+    <div class="col-xs-7">
+        <a class="btn btn-primary btn-sm" style="border: none; background-image: linear-gradient(to right, grey, white, grey); color: black;" href="wacc?id={{ i.id }}"> WACC</a>
+        <a class="btn btn-primary btn-sm" style="border: none; background-image: linear-gradient(to right, #DC143C, white, #DC143C); color: black;" href="wacc_delete?id={{ i.id }}" onclick="return deleteItem()"> Delete WACC Data</a>
+        <br>
+        <a class="btn btn-primary btn-sm" style="border: none; background-image: linear-gradient(to right, grey, white, grey); color: black;" href="fsapl?id={{ i.id }}"> FSAP&L</a>
+        <a class="btn btn-primary btn-sm" style="border: none; background-image: linear-gradient(to right, #DC143C, white, #DC143C); color: black;" href="fsapl_delete?id={{ i.id }}" onclick="return deleteItem()"> Delete FSAP&L Data</a>
+        <br>
+        <a class="btn btn-primary btn-sm" style="border: none; background-image: linear-gradient(to right, grey, white, grey); color: black;" href="fsabs?id={{ i.id }}"> FSABS</a>
+        <a class="btn btn-primary btn-sm" style="border: none; background-image: linear-gradient(to right, #DC143C, white, #DC143C); color: black;" href="fsabs_delete?id={{ i.id }}" onclick="return deleteItem()"> Delete FSABS Data</a>
+        <br>
+        <a class="btn btn-primary btn-sm" style="border: none; background-image: linear-gradient(to right, grey, white, grey); color: black;" href="vdcf?id={{ i.id }}"> DCF</a>
+        <a class="btn btn-primary btn-sm" style="border: none; background-image: linear-gradient(to right, #DC143C, white, #DC143C); color: black;" href="dcf_delete?id={{ i.id }}" onclick="return deleteItem()"> Delete DCF Data</a>
+
+        <br>
+        <a class="btn btn-primary btn-sm" href="exportDcf?id={{ i.id }}" style="border: none; background-image: linear-gradient(to right, grey, white, grey); color: black;">Export DCF</a>
+
+        <a class="btn btn-primary btn-sm" style="border: none; background-image: linear-gradient(to right, #DC143C, white, #DC143C); color: black;" onclick="return deleteItem()" href="delete_input?id={{ i.id }}"> Delete {{ i.project }}</a>
+    </div>
+</div>
+<script>
+    function deleteItem(){
+        if(confirm('Are you sure you want to delete this data?')){
+            return true;
+            }
+        else{
+            return false;
+            }
+        }
+    </script>
+{% endfor %}
+{% else %}
+<h1 style="text-align: center; color: white">You have not added any project!</h1>
+{% endif %}
+{% endblock %}

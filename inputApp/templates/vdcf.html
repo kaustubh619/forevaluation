@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DCF Page</title>
+</head>
+<body>
+{% extends 'index.html' %}
+{% block title %}FSAP&L{% endblock %}
+{% block content %}
+{% if data %}
+<h1 style="text-align: center; font-family: 'Satisfy'; margin: 10px; color: white">Discounted Cash Flow</h1>
+<table>
+  <tr>
+    <th style="background-color: black; color:white; border: 1px solid white">Project</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Report</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 1</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 2</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 3</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 4</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 5</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Terminal Period</th>
+  </tr>
+    {% for i in data %}
+  <tr>
+    <td>{{ i.project }}</td>
+    <td>{{ i.report }}</td>
+    <td>{{ i.year_1 }}</td>
+    <td>{{ i.year_2 }}</td>
+    <td>{{ i.year_3 }}</td>
+    <td>{{ i.year_4 }}</td>
+    <td>{{ i.year_5 }}</td>
+    <td>{{ i.terminal_period }}</td>
+  </tr>
+    {% endfor %}
+</table>
+{% for x in output %}
+<h4 style="text-align: center; margin-top: 40px; color: white">Long Term Sustainable Growth Rate: <b>{{ x.long_term_sustainable_growth_rate }}%</b></h4>
+<h4 style="text-align: center; color: white">Terminal Value: <b>&#8377 {{ x.terminal_value }}</b></h4>
+<h4 style="text-align: center; color: white">Sum of Present Value of Net Free Cash Flows to Equity: <b>&#8377 {{ x.sum_of_present_value_of_net_free_cash_flows_to_equity }}</b></h4>
+<h4 style="text-align: center; color: white">Present Value of Terminal Value: <b>&#8377 {{ x.present_value_of_terminal_value }}</b></h4>
+<hr>
+<h4 style="text-align: center; color: white">Gross Equity Value: <b>&#8377 {{ x.gross_equity_value }}</b></h4>
+<h4 style="text-align: center; color: white">(Add) Investments: <b>&#8377 {{ x.investments }}</b></h4>
+<h4 style="text-align: center; color: white">(Add) Cash & Equivalent: <b>&#8377 {{ x.cash_and_equivalent }}</b></h4>
+<h4 style="text-align: center; color: white">(Add) Other Non Current Assets: <b>&#8377 {{ x.other_non_current_assets }}</b></h4>
+<h4 style="text-align: center; color: white">(Less) Preference Shares: <b>&#8377 {{ x.pref_shares }}</b></h4>
+<h4 style="text-align: center; color: white">(Less) Debt: <b>&#8377 {{ x.debt }}</b></h4>
+<h4 style="text-align: center; color: white">(Less) Contingent Liabilities: <b>&#8377 {{ x.contingent_liabilities }}</b></h4>
+<h3 style="text-align: center; color: white"><b>Equity Value: </b><b>&#8377 {{ x.equity_value }}</b></h3>
+{% endfor %}
+{% else %}
+
+{% if wacc_data %}
+{% if pl_data %}
+{% if bs_data %}
+
+<a class="btn btn-primary btn-sm" style="width: 400px; height: 50px; font-size: 2.5rem;
+border: none; border-radius: 25px; background-color: #ff6e42; margin-left: 27%; margin-top: 10%;" href="dcf?id={{ id }}">Click</a>
+<img src="static/images/logo.png" style="margin-top: 10%;">
+
+{% else %}
+<h1 style="color:white">FSABL data missing!</h1>
+{% endif %}
+{% else %}
+<h1 style="color:white">FSAP&L data missing!</h1>
+{% endif %}
+{% else %}
+<h1 style="color:white">WACC data missing!</h1>
+{% endif %}
+
+{% endif %}
+{% endblock %}
+</body>
+</html>

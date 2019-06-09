@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% block title %}FSABS{% endblock %}
+{% block content %}
+{% if data %}
+<h1 style="text-align: center; font-family: 'Satisfy'; margin: 20px; color: white">FSABS Data</h1>
+<table>
+  <tr>
+    <th style="background-color: black; color:white; border: 1px solid white">Project</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Report</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 0</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 1</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 2</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 3</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 4</th>
+    <th style="background-color: black; color:white; border: 1px solid white">Year 5</th>
+  </tr>
+    {% for i in data %}
+  <tr>
+    <td>{{ i.project }}</td>
+    <td>{{ i.report }}</td>
+    <td>{{ i.year_0 }}</td>
+    <td>{{ i.year_pos_1 }}</td>
+    <td>{{ i.year_pos_2 }}</td>
+    <td>{{ i.year_pos_3 }}</td>
+    <td>{{ i.year_pos_4 }}</td>
+    <td>{{ i.year_pos_5 }}</td>
+  </tr>
+    {% endfor %}
+</table>
+{% else %}
+
+<div class="card panel-form">
+    <h3 class="page-title">FSABS input sheet</h3>
+    <a href="fsabs_excel?id={{ pid }}" class="btn btn-primary" style="margin-left: 30%; width: 40%; border: none; border-radius: 15px; background-color: #ff6e42">Download</a>
+    <hr style="border: 3px groove #b6aea4">
+    <h3 class="page-title">Upload excel sheet with data</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input style="margin-left: 30%" type="file" name="myFile">
+        <br>
+        <button class="btn btn-success" style="margin-left: 30%; width: 40%; border: none; border-radius: 15px; background-color: #ff6e42" type="submit">Upload</button>
+    </form>
+    <h3 style="text-align: center; color: red">{{ error }}</h3>
+    <h3 style="text-align: center"><u>Note</u>: While uploading the data sheet, </h3>
+    <ul style="font-size: 2rem; text-align: center">
+        <li>Leave the 'id' column blank.</li>
+        <li>Fill the 'project' column with project id.</li>
+        <li>Do not leave any cell blank.</li>
+    </ul>
+</div>
+{% endif %}
+{% endblock %}

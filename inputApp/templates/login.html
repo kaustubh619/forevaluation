@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+<body>
+<div id="wrapper">
+  <div id="left">
+    <div id="signin">
+      <div class="logo">
+        <img src="static/images/logo.png">
+      </div>
+      <form role="form" action="{% url 'login'%}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+        <div>
+          <input type="text" required placeholder="Username" style="font-size: 1em" name="username">
+        </div>
+        <div>
+          <br>
+          <input type="password" style="font-size: 1em" required placeholder="Password" name="password" id="id_password">
+        </div>
+          <br>
+          <div>
+              <input type="checkbox" id="box" onclick ="reveal()">&nbsp; <span style="margin-left: 38%">show password</span>
+          </div>
+        <br>
+                {% if msg %}
+                <p class="error_message" style="text-align: center; color: red"><strong>{{ msg }}</strong></p>
+                {% endif %}
+        <br>
+        <button type="submit" class="primary-btn">Sign In</button>
+      </form>
+      <div class="links">
+        <a href="">Forgot Password?</a>
+        <a href="">Sign in with Google</a>
+      </div>
+      <div class="or">
+        <hr class="bar" />
+        <span>OR</span>
+        <hr class="bar" />
+      </div>
+      <a href="registration" class="secondary-btn" style="font-size: 1.1em">Create an account</a>
+    </div>
+    <footer id="main-footer">
+      <p>Copyright &copy; 2018, ForEvaluation All Rights Reserved</p>
+      <div>
+        <a href="">Terms of Use</a> | <a href="">Privacy Policy</a>
+      </div>
+    </footer>
+  </div>
+  <div id="right">
+    <div id="showcase">
+      <div class="showcase-content">
+        <h1 class="showcase-text">
+
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    function reveal()
+    {
+        if(document.getElementById('box').checked)
+            {document.getElementById("id_password").type='text';}
+        else
+            document.getElementById("id_password").type='password';
+    }
+</script>
+</body>
+</html>

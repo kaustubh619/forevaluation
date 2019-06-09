@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+    {% load crispy_forms_tags %}
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card1 card-container1" style="background-color: white">
+                <h1 class="page-title">Registration</h1>
+                <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+                <p id="profile-name" class="profile-name-card"></p>
+                <form action="" method="post" novalidate>{% csrf_token %}
+                <h4>{{ form|crispy }}</h4>
+                <input type="submit" value="Sign Up" class="btn btn-primary btn-xs">
+                </form>
+                <h3>{{ message }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function reveal()
+    {
+        if(document.getElementById('box').checked)
+            {document.getElementById("id_password").type='text';}
+        else
+            document.getElementById("id_password").type='password';
+    }
+</script>
+</body>
+</html>
