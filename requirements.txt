@@ -24,7 +24,7 @@ pyexcel==0.5.13
 pyexcel-io==0.5.17
 pyexcel-webio==0.1.4
 pytz==2019.1
-PyYAML==5.1
+PyYAML==5.4
 sqlparse==0.3.0
 tablib==0.13.0
 texttable==1.6.1
